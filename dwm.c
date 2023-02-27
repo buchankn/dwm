@@ -797,6 +797,9 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 	short isCode = 0;
 	char *text;
 	char *p;
+    int line_thickness = 0;
+    int line_start = -1;
+    char line_color[8];
 
 	len = strlen(stext) + 1 ;
 	if (!(text = (char*) malloc(sizeof(char)*len)))
@@ -884,7 +887,28 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 					drw_rect(drw, rx + x, ry, rw, rh, 1, 0);
 				} else if (text[i] == 'f') {
 					x += atoi(text + ++i);
-				}
+				} else if (text[i] == 'l') {
+                    line_start = x;
+
+                    /* Get the thickness of the line */
+                    line_thickness = atoi(text + ++i);
+                    while (text[++i] != ',');
+
+                    /* Get the color for the line */
+                    memcpy(line_color, (char*)text+i+1, 7);
+                    line_color[7] = '\0';
+                    i += 7;
+                } else if (text[i] == 'e') {
+                    if (line_start != -1) {
+                        /* Draw a line on the top portion of the bar from line_start to x */
+                        drw_clr_create(drw, &drw->scheme[ColFg], line_color);
+
+                        drw_rect(drw, line_start, 0, x - line_start, line_thickness, 1, 0);
+
+                        line_start = -1;
+                    }
+                }
+
 			}
 
 			text = text + i + 1;
@@ -1895,7 +1919,7 @@ setup(void)
 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
 		die("no fonts could be loaded.");
 	lrpad = drw->fonts->h;
-	bh = drw->fonts->h + 2;
+	bh = drw->fonts->h + vertpadbar;
 	updategeom();
 	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);

@@ -12,6 +12,7 @@ static       int smartgaps          = 0;        /* 1 means no outer gap when the
 
 static int showbar            = 1;        /* 0 means no bar */
 static int topbar             = 1;        /* 0 means bottom bar */
+static const int vertpadbar   = 8;        /* vertical padding for statusbar */
 static char font[]            = "SauceCodePro Nerd Font:size=10";
 static char dmenufont[]       = "SauceCodePro Nerd Font:size=10";
 static const char *fonts[]          = { font };
