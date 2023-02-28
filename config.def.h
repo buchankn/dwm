@@ -51,8 +51,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "vanitygaps.c"
 
 static const Layout layouts[] = {
-	/* symbol     arrange function */
-	{ "[]=",      tile },    /* Default: Master on left, slaves on right */
+    /* symbol     arrange function */
+    { "[]=",      tile },    /* Default: Master on left, slaves on right */
     { "TTT",      bstack },  /* Master on top, slaves on bottom */
 
     { "[@]",      spiral },  /* Fibonacci spiral */
@@ -191,3 +191,10 @@ static const Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
+/* signal definitions */
+/* signum must be greater than 0 */
+/* trigger signals using `xsetroot -name "fsignal:<signum>"` */
+static Signal signals[] = {
+	/* signum       function        argument  */
+	{ 9,            quit,           {0} },
+};
