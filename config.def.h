@@ -58,9 +58,9 @@ static const Rule rules[] = {
     /* class      instance     title       tags mask     isfloating  floatpos               monitor */
     { "Gimp",     NULL,        NULL,       0,            1,          NULL,                  -1 },
     { "Firefox",  NULL,        NULL,       1 << 8,       0,          NULL,                  -1 },
-    { NULL,       "spterm",	   NULL,	   SPTAG(0),     1,          NULL,                  -1 },
-    { NULL,		  "keepassxc", NULL,	   SPTAG(1),     0,          NULL,                  -1 },
-    { "Qalculate", NULL,       NULL,       SPTAG(2),     1,          "50% 50% 50% 50%",     -1 },
+    { NULL,       "spterm",    NULL,	   SPTAG(0),     1,          NULL,                  -1 },
+    { NULL,       "keepassxc", NULL,	   SPTAG(1),     0,          NULL,                  -1 },
+    { "Qalculate", NULL,       NULL,       SPTAG(2),     1,          "50% 50% 45% 52%",     -1 },
 };
 
 /* layout(s) */
