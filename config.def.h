@@ -38,7 +38,7 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"keepassxc", NULL };
-const char *spcmd3[] = {"qalculate-gtk", "--class=Qalculate", NULL };
+const char *spcmd3[] = {"st", "-n", "insect", "-g", "90x34", "-t", "insect - scientific calculator", "-e", "sh", "-c", "'insect'", NULL };
 
 static Sp scratchpads[] = {
     /* name          cmd  */
@@ -60,7 +60,7 @@ static const Rule rules[] = {
     { "Firefox",  NULL,        NULL,       1 << 8,       0,          NULL,                  -1 },
     { NULL,       "spterm",    NULL,	   SPTAG(0),     1,          NULL,                  -1 },
     { NULL,       "keepassxc", NULL,	   SPTAG(1),     0,          NULL,                  -1 },
-    { "Qalculate", NULL,       NULL,       SPTAG(2),     1,          "50% 50% 45% 52%",     -1 },
+    { NULL,       "insect",    NULL,       SPTAG(2),     1,          NULL,                  -1 },
 };
 
 /* layout(s) */
