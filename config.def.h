@@ -4,10 +4,10 @@
 static unsigned int borderpx  = 1;        /* border pixel of windows */
 static unsigned int snap      = 32;       /* snap pixel */
 
-static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
+static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static       int          smartgaps = 0;        /* 1 means no outer gap when there is only one window */
 
 static       int showbar        = 1;        /* 0 means no bar */
@@ -86,11 +86,11 @@ static const Layout layouts[] = {
     { "|M|",      centeredmaster },         /* Master in middle, slaves on sides */
     { ">M>",      centeredfloatingmaster }, /* Same but master floats */
 
-//    { "===",      bstackhoriz },
-//    { "HHH",      grid },
-//    { "###",      nrowgrid },
-//    { "---",      horizgrid },
-//    { ":::",      gaplessgrid },
+    { "===",      bstackhoriz },
+    { "HHH",      grid },
+    { "###",      nrowgrid },
+    { "---",      horizgrid },
+    { ":::",      gaplessgrid },
 
     { "><>",      NULL },    /* no layout function means floating behavior */
     { NULL,       NULL },
@@ -187,14 +187,20 @@ static const Keychord *keychords[] = {
     &((Keychord){1, {{MODKEY|ShiftMask, XK_c}},            killclient,     { 0 } }),
 
     /* Layouts */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},           setlayout,      { .v = &layouts[0] } }), /* tile */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},           setlayout,      { .v = &layouts[1] } }), /* bstack */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_s}},           setlayout,      { .v = &layouts[2] } }), /* spiral */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_d}},           setlayout,      { .v = &layouts[3] } }), /* dwindle */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_k}},           setlayout,      { .v = &layouts[4] } }), /* deck */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_m}},           setlayout,      { .v = &layouts[5] } }), /* monocle */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_c}},           setlayout,      { .v = &layouts[6] } }), /* centered master */
-    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_f}},           setlayout,      { .v = &layouts[7] } }), /* centered floating master */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_t}},           setlayout,      { .v = &layouts[0] } }),  /* tile */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_b}},           setlayout,      { .v = &layouts[1] } }),  /* bstack */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_s}},           setlayout,      { .v = &layouts[2] } }),  /* spiral */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_d}},           setlayout,      { .v = &layouts[3] } }),  /* dwindle */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_k}},           setlayout,      { .v = &layouts[4] } }),  /* deck */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_m}},           setlayout,      { .v = &layouts[5] } }),  /* monocle */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_c}},           setlayout,      { .v = &layouts[6] } }),  /* centered master */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_f}},           setlayout,      { .v = &layouts[7] } }),  /* centered floating master */
+
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_h}},           setlayout,      { .v = &layouts[8] } }),  /* bstackhoriz */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_g}},           setlayout,      { .v = &layouts[9] } }),  /* grid */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_n}},           setlayout,      { .v = &layouts[10] } }), /* nrowgrid */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_o}},           setlayout,      { .v = &layouts[11] } }), /* horizgrid */
+    &((Keychord){2, {{MODKEY, XK_l}, {0, XK_z}},           setlayout,      { .v = &layouts[12] } }), /* gaplessgrid */
 
     /* Floating Layout */
     &((Keychord){1, {{MODKEY, XK_space}},                  setlayout,      { 0 } }),
@@ -215,11 +221,11 @@ static const Keychord *keychords[] = {
     /* &((Keychord){1, {{MODKEY|ShiftMask, XK_0}},            tag,            { .ui = ~0 } }), */
 
     /* Rotate focus between monitors */
-    /* &((Keychord){1, {{MODKEY, XK_comma}},                  focusmon,       { .i = -1 } }), */
-    /* &((Keychord){1, {{MODKEY, XK_period}},                 focusmon,       { .i = +1 } }), */
+    &((Keychord){1, {{MODKEY, XK_bracketleft}},            focusmon,       { .i = -1 } }),
+    &((Keychord){1, {{MODKEY, XK_bracketright}},           focusmon,       { .i = +1 } }),
 
-    /* &((Keychord){1, {{MODKEY|ShiftMask, XK_comma}},        tagmon,         { .i = -1 } }), */
-    /* &((Keychord){1, {{MODKEY|ShiftMask, XK_period}},       tagmon,         { .i = +1 } }), */
+    &((Keychord){1, {{MODKEY|ShiftMask, XK_bracketleft}},  tagmon,         { .i = -1 } }),
+    &((Keychord){1, {{MODKEY|ShiftMask, XK_bracketright}}, tagmon,         { .i = +1 } }),
 
     /* Audio */
     &((Keychord){1, {{0, XF86XK_AudioMute}},               spawn,          SHCMD("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; kill -44 $(pidof dwmblocks)") }),
