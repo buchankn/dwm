@@ -245,6 +245,16 @@ static const Keychord *keychords[] = {
     /* Scratchpad calculator */
     &((Keychord){2, {{MODKEY, XK_s}, {0, XK_c}},           togglescratch,  { .ui = 2 } }), /* calculator */
 
+    /* Screenshot */
+    &((Keychord){2, {{0, XK_Print}, {0, XK_f}},            spawn,          SHCMD("maim \"/home/$USER/Pictures/$(date)\"") }),
+    &((Keychord){2, {{0, XK_Print}, {0, XK_w}},            spawn,          SHCMD("maim --window $(xdotool getactivewindow) \"/home/$USER/Pictures/$(date)\"") }),
+    &((Keychord){2, {{0, XK_Print}, {0, XK_s}},            spawn,          SHCMD("maim --select \"/home/$USER/Pictures/$(date)\"") }),
+
+    /* Clipboard screenshot */
+    &((Keychord){2, {{0, XK_Print}, {0, XK_c}},            spawn,          SHCMD("maim | xclip -selection clipboard -t image/png") }),
+    &((Keychord){2, {{0, XK_Print}, {0, XK_x}},            spawn,          SHCMD("maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png") }),
+    &((Keychord){2, {{0, XK_Print}, {0, XK_z}},            spawn,          SHCMD("maim --select | xclip -selection clipboard -t image/png") }),
+
     /* Quit DWM */
     &((Keychord){1, {{MODKEY|ShiftMask, XK_q}},            quit,           { 0 } }),
 
